@@ -64,8 +64,6 @@ class Userinput(forms.Form):
     )
 
 
-
-
 class EmailForm(forms.Form):
     email = forms.CharField(label='Email Address', required=True)
     email.widget = forms.EmailInput(attrs={'placeholder': 'Email'})
