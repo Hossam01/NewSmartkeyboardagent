@@ -108,7 +108,7 @@ class LoginFormView(View):
             if Advertiser.objects.filter(name=form.cleaned_data['username']).exists():
                 advertiser = Advertiser.objects.get(name=form.cleaned_data['username'])
                 if check_password(form.cleaned_data['password'], advertiser.password):
-                    username = request.session['username'] = form.cleaned_data['username']
+                    username = request.session['username'] =form.cleaned_data['username']
                     context = {'username': username}
                     return redirect('/advertiser/dashboard/', context)
                 else:
@@ -185,7 +185,7 @@ class AdvertisementFormView(View):
         if form.is_valid():
             if 'username' in request.session:
                 username = request.session['username']
-                hoss = Advertiser.objects.get(id=username)
+                hoss = Advertiser.objects.get(name=username)
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             pub_date = form.cleaned_data['pub_date']
@@ -193,15 +193,6 @@ class AdvertisementFormView(View):
             min_age = form.cleaned_data['min_age']
             category = form.cleaned_data.get('category')
             Advertisement.objects.create(name=name, description=description, pub_date=pub_date, advertiser=hoss)
-        if request.POST.get('delete'):
-            nameads = form.cleaned_data.get('advertisement')
-            Advertisement.objects.get(name=nameads).delete()
-        if request.POST.get('update'):
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            pub_date = form.cleaned_data['pub_date']
-            nameads = form.cleaned_data.get('advertisement')
-            Advertisement.objects.filter(name=nameads).update(name=name, description=description, pub_date=pub_date)
         newform = Userinput(None)
         return render(request, 'advertiser/dashboard/forms.html', {'form': newform})
 
@@ -240,8 +231,12 @@ class ResetFormView(View):
                           {'form': form})
 
 
+global hoss,username
 def advertisement(request):
-    stuents = Advertisement.objects.all()
+    if 'username' in request.session:
+        username = request.session['username']
+        hoss = Advertiser.objects.get(name=username)
+    stuents = Advertisement.objects.all().filter(advertiser=hoss)
     context = {'stuents': stuents}
     return render(request, 'advertiser/dashboard/update.html', context)
 

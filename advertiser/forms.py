@@ -2,6 +2,8 @@ from django import forms
 from .views import *
 
 from api.models import Advertisement
+import datetime
+
 
 
 
@@ -52,7 +54,7 @@ class Userinput(forms.Form):
 
     name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name'}))
     description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description'}))
-    pub_date = forms.DateField(required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))
+    pub_date = forms.DateField(initial=datetime.date.today,required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))
     max_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'max_age'}))
     min_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'min_age'}))
     # category = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=FRUIT_CHOICES))
