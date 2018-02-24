@@ -44,9 +44,8 @@ OPTIONS = [
 
 class Userinput(forms.Form):
 
-
-
-    name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name'}))
+    name = forms.CharField(label='name', max_length=20, required=True)
+    name.widget = forms.TextInput(attrs={'placeholder': 'name'})
     description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description'}))
     pub_date = forms.DateField(initial=datetime.date.today,required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))
     max_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'max_age'}))
@@ -66,7 +65,7 @@ class Userinput(forms.Form):
 
 class EmailForm(forms.Form):
     email = forms.CharField(label='Email Address', required=True)
-    email.widget = forms.EmailInput(attrs={'placeholder': 'Email', 'width': 20})
+    email.widget = forms.EmailInput(attrs={'placeholder': 'Email'})
 
 class changeForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='Password', required=True)
