@@ -44,20 +44,23 @@ OPTIONS = [
 
 class Userinput(forms.Form):
 
-    name = forms.CharField(label='name', max_length=20, required=True)
-    name.widget = forms.TextInput(attrs={'placeholder': 'name'})
-    description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description'}))
-    pub_date = forms.DateField(initial=datetime.date.today,required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))
-    max_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'max_age'}))
-    min_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'min_age'}))
+
+
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name' , ' class':'form-control1'}))
+    description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description' , ' class':'form-control1'}))
+    pub_date = forms.DateField(initial=datetime.date.today,required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date' , ' class':'form-control1'}))
+    max_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'max_age' , ' class':'form-control1'}))
+    min_age = forms.IntegerField(required=True, widget=forms.TextInput(attrs={'placeholder': 'min_age' , ' class':'form-control1'}))
     # category = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=FRUIT_CHOICES))
     # category = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=OPTIONS)
+
     category = forms.MultipleChoiceField(
         choices=OPTIONS,
         initial='0',
-        widget=forms.SelectMultiple(),
+        widget=forms.SelectMultiple(attrs={' class':'js-example-basic-multiple'}),
         required=True,
         label='Office'
+
     )
 
 
