@@ -261,7 +261,6 @@ class UpdateFormView(View):
         if form.is_valid():
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
-            pub_date = form.cleaned_data['pub_date']
             Advertisement.objects.filter(id=part_id).update(name=name, description=description)
             newform = update(None)
             return render(request, 'advertiser/dashboard/updateData.html', {'form': newform})
