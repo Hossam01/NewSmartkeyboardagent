@@ -71,10 +71,10 @@ class EmailForm(forms.Form):
 class changeForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='Password', required=True)
     confirmpassword = forms.CharField(widget=forms.PasswordInput, label='Confirm Password', required=True)
-    email = forms.CharField(label='Email Address', required=True)
+    username = forms.CharField(required=True, max_length=25)
     password.widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
     confirmpassword.widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password'})
-    email.widget = forms.EmailInput(attrs={'placeholder': 'Email', 'width': 20})
+    username.widget = forms.TextInput(attrs={'placeholder': 'Username'})
 
 class update(forms.Form):
     name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name'}))

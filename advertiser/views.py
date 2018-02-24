@@ -278,11 +278,15 @@ class ChangepasswordFormView(View):
     def post(self, request):
         form = changeForm(request.POST)
         if form.is_valid():
-            if Advertiser.objects.filter(email=form.cleaned_data['email']).exists():
+            if Advertiser.objects.filter(name=form.cleaned_data['username']).exists():
                 if form.cleaned_data['password'] == form.cleaned_data['confirmpassword']:
-                    email = form.cleaned_data['email']
+                    name = form.cleaned_data['username']
                     password = make_password(form.cleaned_data['password'])
-                    Advertiser.objects.filter(email=email).update(password=password)
+                    Advertiser.objects.filter(name=name).update(password=password)
+                    return redirect('advertiser/login')
+
+            else:
+                messages.error(request, 'Username is not here')
 
             form = changeForm(None)
             return render(request, 'advertiser/changeEmail.html',

@@ -54,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="log-input">
 								<div class="log-input-left">
 									{% csrf_token %}
-									{{ form.email }}
+									{{ form.username }}
 								</div>
 
 								<div class="clearfix"> </div>
@@ -76,7 +76,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="clearfix"> </div>
 							</div>
 							<input type="submit" value="Reset Login" >
-						</form>	 
+						</form>
+							{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 						</div>
 						
 					</div>
