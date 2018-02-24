@@ -46,12 +46,6 @@ class Userinput(forms.Form):
 
 
 
-    advertisement = forms.ChoiceField(choices=[], required=False,widget=forms.Select(attrs={'placeholder':'advertisement'}))
-    def __init__(self,*args, **kwargs):
-        super(Userinput,self).__init__(*args, **kwargs)
-        self.fields['advertisement'].choices = Advertisement.objects.all().values_list("name","name").filter(advertiser_id=2)
-
-
     name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name'}))
     description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description'}))
     pub_date = forms.DateField(initial=datetime.date.today,required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))
@@ -85,4 +79,3 @@ class changeForm(forms.Form):
 class update(forms.Form):
     name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'name'}))
     description = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'description'}))
-    pub_date = forms.DateField(required=True, widget=forms.TextInput(attrs={'placeholder': 'pub_date'}))

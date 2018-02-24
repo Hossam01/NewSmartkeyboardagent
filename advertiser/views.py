@@ -60,7 +60,7 @@ class ChartsView(View):
     template_name = 'advertiser/dashboard/charts.html'
 
     def get(self, request):
-        stuents = Advertisement.objects.filter(name="Hossam").count()
+        stuents = Advertisement.objects.filter().count()
         context = {'stuents': stuents}
         return render(request, 'advertiser/dashboard/charts.html', context)
 
@@ -198,7 +198,7 @@ class AdvertisementFormView(View):
 
 
 def Student(request):
-    stuents = Advertisement.objects.filter(name="Hossam").count()
+    stuents = Advertisement.objects.all.count()
     context = {'stuents': stuents}
     return render(request, 'advertiser/dashboard/charts.html', context)
 
@@ -262,7 +262,7 @@ class UpdateFormView(View):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             pub_date = form.cleaned_data['pub_date']
-            Advertisement.objects.filter(id=part_id).update(name=name, description=description, pub_date=pub_date)
+            Advertisement.objects.filter(id=part_id).update(name=name, description=description)
             newform = update(None)
             return render(request, 'advertiser/dashboard/updateData.html', {'form': newform})
 
