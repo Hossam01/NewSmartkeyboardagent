@@ -242,9 +242,14 @@ def advertisement(request):
 
 
 def delete(request, part_id):
+    if 'username' in request.session:
+        username = request.session['username']
+        hoss = Advertiser.objects.get(name=username)
+    stuents = Advertisement.objects.all().filter(advertiser=hoss)
+    context = {'stuents': stuents}
     object = Advertisement.objects.get(id=part_id)
     object.delete()
-    return render(request, 'advertiser/dashboard/Done.html')
+    return render(request, 'advertiser/dashboard/update.html',context)
 
 
 class UpdateFormView(View):
